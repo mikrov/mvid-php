@@ -1,43 +1,45 @@
 <?php
-  require_once("mvid-challenge.php");
-
-  $shared_key = "<shared-key>";     // Shared key beween application and MV-ID
-  $domain = "<application-domain>"; // The application domain registed at MV-ID
-
-  $mv_session_hash = $_POST["mv_session_hash"];
-  if (isset($_COOKIE["mv_session_id"])) {
-    $mv_session_id = $_COOKIE["mv_session_id"];
-  }
-  else if ($mv_session_hash) {
-    // A session hash was recieved from MV-ID
-    $success = registerSessionUsage($mv_session_hash,$domain,$shared_key,$mv_session_id,$error_message);
-    if ($success) {
-      setcookie("mv_session_id",$mv_session_id);
-    }
-    else {
-      echo("Error: ".$error_message);
-    }
-  }
+  require_once("mvid/mvid-handler.php");
+  $mv_session_id = $$mvid_storage_name;
 ?>
- 
+
 <html>
- 
+
   <head>
     <title>MV-ID Unauthenticated</title>
     <meta charset="utf-8" />
     <script src="https://signon.mv-nordic.com/sp-js/mvlogin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+  
+      $(function() {
+        var sso_args = {
+          mv_session_id: "<?=$mv_session_id?>"
+        }
+        doSSO(sso_args,function(res) {
+          if (res.app_auth_ok) {
+            /* SSO Success:
+               User has been authenticated and the application has been registered for session usage
+               In this example the user is redirected to the location entered in mvid-config.php.
+               If you are already in the "redirect_on_success" page */
+            document.location = 'start.php';
+          }
+          else if (!res.mvid_auth_ok) {
+            /* SSO Failed:
+               User has not been authenticated or the application did not register the session
+               correctly. In this example we will place a login button for the user to press.
+               Alternatively you can just want to call doLogin() right away as shown in the code comment*/
+            $("#mvid").html("<button onclick='doLogin()'>Login</button>");
+            //doLogin();
+          }
+        });
+      });
+    
+    </script>
   </head>
- 
+  
   <body>
-<?
-  if (isset($mv_session_id)) {
-    echo("Logged in with mv_session_id : $mv_session_id");
-  }
-  else {
-    echo("<button onclick='doLogin()'>Login</button>");
-  }
-?>
+    <div id="mvid"></div>
   </body>
- 
+
 </html>
 
