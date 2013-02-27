@@ -1,4 +1,6 @@
 <?php
+  
+  global $mvid_config;
 
   $mvid_config = Array(
     "mvid" => Array(
