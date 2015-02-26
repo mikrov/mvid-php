@@ -26,7 +26,7 @@
   else {
 	$mvid_url = $mvid_default_url;
   }
-  
+
   $mvid_context = isset($mvidContext) ? $mvidContext : $mvid_default_context;
 
   if($mvid_url != $mvid_default_url && (!isset($_COOKIE["mvid-current-context"]) || $_COOKIE["mvid-current-context"] != $mvid_context || !isset($_COOKIE["mvid-current-url"]) || $_COOKIE["mvid-current-url"] != $mvid_url)) {
@@ -34,7 +34,7 @@
 	setcookie("mvid-current-url",$mvid_url);
 	if(isset($_SERVER["HTTP_X_FORWARDED_URL_ORIG"])) $full_url = $_SERVER["HTTP_X_FORWARDED_URL_ORIG"].(isset($_SERVER["QUERY_STRING"]) && $_SERVER["QUERY_STRING"] != "" ? "?".$_SERVER["QUERY_STRING"] : "");
 	else $full_url = "http".((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? "s" : "") . "://". $_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
-	header("Location: ".$mvid_url."/web-deploy-tools/context/set/schdev?redirect=".$full_url);
+	header("Location: ".$mvid_url."/web-deploy-tools/context/set/".$mvid_context."?redirect=".$full_url);
 	exit();
   }
 

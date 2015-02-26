@@ -27,6 +27,8 @@
     <script src="<?php echo $mvid_url; ?>/sp-js/mvlogin.js" type="text/javascript"></script>
     <script type="text/javascript">
   
+	  mvid_url = '<?php echo $mvid_url; ?>';
+  
       $(function() {
         var sso_args = {
           mv_session_id: "<?=$mv_session_id?>"
