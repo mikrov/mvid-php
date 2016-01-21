@@ -28,7 +28,7 @@
     <script src="<?=$mvid_url;?>/sp-js/mvlogin.js"></script>
     <script type="text/javascript">
 
-	  var mvid_url = '<?=$mvid_url;?>';
+	  mvid_url = '<?=$mvid_url;?>';
 
       $(function() {
         var sso_args = {
