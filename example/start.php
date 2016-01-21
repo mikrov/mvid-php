@@ -25,14 +25,14 @@
   <head>
     <meta charset="utf-8">
     <title>MV-ID Unauthenticated</title>
-    <script src="<?php echo $mvid_url; ?>/sp-js/mvlogin.js" type="text/javascript"></script>
+    <script src="<?=$mvid_url;?>/sp-js/mvlogin.js"></script>
     <script type="text/javascript">
 
-	  mvid_url = '<?php echo $mvid_url; ?>';
+	  var mvid_url = '<?=$mvid_url;?>';
 
       $(function() {
         doKeepAlive({
-            mv_session_id: "<?=$mv_session_id?>",
+            mv_session_id: "<?=$mv_session_id;?>",
             on_session_lost: "index.php"
           },
           function(is_session_alive) {
@@ -47,7 +47,7 @@
   </head>
 
   <body>
-    Logged in with mv_session_id: <?=$mv_session_id?>
+    Logged in with mv_session_id: <?=$mv_session_id;?>
   </body>
 
 </html>

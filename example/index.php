@@ -25,14 +25,14 @@
   <head>
     <meta charset="utf-8">
     <title>MV-ID Unauthenticated</title>
-    <script src="<?php echo $mvid_url; ?>/sp-js/mvlogin.js" type="text/javascript"></script>
+    <script src="<?=$mvid_url;?>/sp-js/mvlogin.js"></script>
     <script type="text/javascript">
 
-	  mvid_url = '<?php echo $mvid_url; ?>';
+	  var mvid_url = '<?=$mvid_url;?>';
 
       $(function() {
         var sso_args = {
-          mv_session_id: "<?=$mv_session_id?>"
+          mv_session_id: "<?=$mv_session_id;?>"
         }
         doSSO(sso_args,function(res) {
           if (res.app_auth_ok) {
@@ -61,4 +61,3 @@
   </body>
 
 </html>
-

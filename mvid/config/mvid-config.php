@@ -9,7 +9,7 @@
 
         /* Type in the shared key you recieved from MV-ID after you registered your application domain. If you havn't
            registered your application domain yet there is a form you can fill in at:
-             https://signon.mv-nordic.com/wiki/app-domain-reg */
+             https://signon.mv-nordic.com/wiki/SignUp */
         "shared_key" => "<shared-key>",
 
         /* The domain you wish to register the user sessions with. The base domain of this value must match the
@@ -68,7 +68,7 @@
     )
   );
 
-  // This config tool expects the existance of a key-value array called $config. See the example config.php
+  // This config tool expects the existence of a key-value array called $mvid_config. See the example config.php
   // File in config/config.php
   function read_config($path,$default_val=NULL) {
     global $mvid_config;

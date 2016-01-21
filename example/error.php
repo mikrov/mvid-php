@@ -7,8 +7,7 @@
   </head>
 
   <body>
-    Error: <?=$_GET["error_message"]?>
+    Error: <?=$_GET["error_message"];?>
   </body>
 
 </html>
-

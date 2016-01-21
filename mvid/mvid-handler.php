@@ -69,22 +69,22 @@
       $storage_class->save($mvid_storage_name,$$mvid_storage_name);
 
       if ($mvid_redirect_on_success !== NULL) {
-        header( "Location: $mvid_redirect_on_success" ) ;
+        header("Location: $mvid_redirect_on_success") ;
       }
     }
     else {
       if ($mvid_redirect_on_failure !== NULL) {
-        header( "Location: $mvid_redirect_on_failure?error_message=".urlencode($error_message) ) ;
+        header("Location: $mvid_redirect_on_failure?error_message=".urlencode($error_message)) ;
       }
       else {
-        echo("Error: ".$error_message);
+        echo "Error: ".$error_message;
         exit(0);
       }
     }
   }
   else {
     if ($storage_class===NULL) {
-      echo("Error: ".$error_message);
+      echo "Error: ".$error_message;
       exit(0);
     }
     else {
