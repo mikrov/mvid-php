@@ -1,21 +1,21 @@
 <?php
 
     /**
-	 * Note about using dev/test environments
-	 * MV-ID can be set to use the production environment or a test or development environment. If you are using another environment than production,
-	 * you should specify a context that determines what dev or test instance to run on.
-	 * The environment and context is read from the mvid-config.php file, but can also be specified here as:
-	 * $mvidEnv = "dev";
-	 * $mvidContext = "mvid-v31";
-	 * These needs to be set before including the mvid-handler.php
-	 * After including mvid-handler.php you also have the variable $mvid_url that defines the url of the mvid instance you are using
-	 */
+     * Note about using dev/test environments
+     * MV-ID can be set to use the production environment or a test or development environment. If you are using another environment than production,
+     * you should specify a context that determines what dev or test instance to run on.
+     * The environment and context is read from the mvid-config.php file, but can also be specified here as:
+     * $mvidEnv = "dev";
+     * $mvidContext = "mvid-v31";
+     * These needs to be set before including the mvid-handler.php
+     * After including mvid-handler.php you also have the variable $mvid_url that defines the url of the mvid instance you are using
+     */
 
-	//$mvidEnv = "dev";
-	//$mvidContext = "mvid-v31";
+    //$mvidEnv = "dev";
+    //$mvidContext = "mvid-v31";
 
-	require_once __DIR__."/../mvid/mvid-handler.php";
-	$mv_session_id = $$mvid_storage_name;
+    require_once __DIR__."/../mvid/mvid-handler.php";
+    $mv_session_id = $$mvid_storage_name;
 
 ?>
 
@@ -28,7 +28,7 @@
     <script src="<?=$mvid_url;?>/sp-js/mvlogin.js"></script>
     <script type="text/javascript">
 
-	  mvid_url = '<?=$mvid_url;?>';
+      mvid_url = '<?=$mvid_url;?>';
 
       $(function() {
         doKeepAlive({
