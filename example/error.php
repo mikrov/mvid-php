@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html>
 
   <head>
+    <meta charset="utf-8">
     <title>MV-ID Unauthenticated</title>
-    <meta charset="utf-8" />
   </head>
 
   <body>

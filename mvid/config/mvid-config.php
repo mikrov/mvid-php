@@ -1,5 +1,5 @@
 <?php
-  
+
   global $mvid_config;
 
   $mvid_config = Array(
@@ -18,20 +18,20 @@
 
         "redirect_on_success" => "start.php",
         "redirect_on_failure" => "error.php",),
-		
+
 	  "environment" => Array(
-	  
+
 		/* Determines what mv-id environment to use as default. Default is empty value which will use the production environment.
-		   Other values are dev and test, they will resolve to their designated development and test urls. 
+		   Other values are dev and test, they will resolve to their designated development and test urls.
 		   If this is set, context should also be used, or the application might not reach a valid mv-id instance
 		   This config value can be overridden by defining the variable $mvidEnv before the mvid-handler is included. */
 		"environment" => "",
-		
+
 		/* Sets the context to use on the dev or test environments. Each environment can have multiple named contexts running on them
 		   and to reach a specific one, this context is used.
 		   This config value can be overridden by defining the variable $mvidContext before the mvid-handler is included.*/
 		"context" => "",
-		
+
 	  ),
 
       "storage" => Array(
@@ -86,5 +86,3 @@
     }
     return $current_crumb;
   }
-
-?>
