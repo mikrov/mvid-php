@@ -9,7 +9,7 @@ The actual integration library is contained in the "mvid" folder. The file you n
 "mvid/mvid-handler.php":
 
     <?php
-      require_once __DIR__."/mvid/mvid-handler.php";
+      require_once 'mvid/mvid-handler.php';
     ?>
 
 Installation
