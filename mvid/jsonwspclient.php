@@ -145,7 +145,7 @@ class JsonWspClient
 	 * @param $cookies List of cookies to use in the call, merges with the cookies already set on the client, but is not stored for future calls
 	 * @return JsonWspResponse object that contains the response information
 	 */
-	public function CallMethod($methodname,$args=null,$cookies=null)
+	public function CallMethod($methodname,$args=null,$cookies=[])
 	{
 		// No arguments given, use empty array
 		if($args == null) $args = array();
@@ -165,7 +165,7 @@ class JsonWspClient
 	 * @param $content_type The contenttype to send in the request, defaults to application/json
 	 * @return JsonWspResponse object that contains the response information
 	 */
-	public static function SendRequest($url,$data="",$content_type="application/json",$ignoreSSLWarnings,$cookies)
+	public static function SendRequest($url,$data="",$content_type="application/json",$ignoreSSLWarnings=false,$cookies=[])
 	{
 
 		$headers = array("Content-Type: ".$content_type, "Content-length: ".strlen($data));
