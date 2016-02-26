@@ -9,7 +9,7 @@ The actual integration library is contained in the "mvid" folder. The file you n
 "mvid/mvid-handler.php":
 
     <?php
-      require_once("mvid/mvid-handler.php");
+      require_once 'mvid/mvid-handler.php';
     ?>
 
 Installation
@@ -24,4 +24,3 @@ This is a fully working example. It requires a registered application domain and
 1. Copy the index.php, start.php and error.php files to your webserver.
 2. Make the site accessable via the application domain name you have registered with MV-ID.
 3. Edit the "mvid-config.php" file to reflect the domain you are using.
-

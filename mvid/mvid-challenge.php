@@ -1,5 +1,5 @@
 <?php
-  require_once("jsonwspclient.php");
+  require_once __DIR__."/jsonwspclient.php";
 
   // MV-ID integration
   // -----------------
@@ -26,7 +26,7 @@
   //   $mv_session_id = md5($mv_session_hash.$nonce.$shared_key);
 
   function registerSessionUsage($mv_session_hash,$domain,$shared_key,&$mv_session_id,&$error_message,$serviceUrl="",$ignoreSSLWarnings=false,$cookies=null) {
-  
+
     // Connect to MV-ID's session security service to register a valid application session
     $client = new JsonWspClient(trim($serviceUrl) != "" ? $serviceUrl : "https://signon.mv-nordic.com/session-security/SessionSecurity/jsonwsp/description",$ignoreSSLWarnings,$cookies);
     $client->setViaProxy(true);
@@ -53,4 +53,3 @@
       return false;
     }
   }
-?>

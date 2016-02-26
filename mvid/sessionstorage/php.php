@@ -1,6 +1,6 @@
 <?php
 
-  require_once("_base.php");
+  require_once __DIR__."/_base.php";
 
   class phpSessionStorage extends MVID_SessionStorage {
     public function save($storage_name,$mv_session_id) {
@@ -16,5 +16,3 @@
       return NULL;
     }
   }
-
-?>

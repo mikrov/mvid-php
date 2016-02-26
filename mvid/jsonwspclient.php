@@ -6,7 +6,7 @@ Copyright 2014 MV-Nordic, www.mv-nordic.com
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either 
+License as published by the Free Software Foundation; either
 version 2.1 of the License, or (at your option) any later version.
 
 This library is distributed in the hope that it will be useful,
@@ -14,28 +14,28 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 Lesser General Public License for more details.
 
-You should have received a copy of the GNU Lesser General Public 
+You should have received a copy of the GNU Lesser General Public
 License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 *******************************************************************************/
 
 
 /*******************************************************************************
-	
+
 	JSONWSP PHP Client library classes
-	
-	This file contains a php implementation of the jsonwsp client protocol. 
+
+	This file contains a php implementation of the jsonwsp client protocol.
 	It is able to make requests using the jsonwsp protocol to fetch a service
 	description and call methods. The methods are called by name and using an
-	associative array to hold arguments. The returned data is wrapped into a 
-	response object and you can fetch response data as json by calling the  
+	associative array to hold arguments. The returned data is wrapped into a
+	response object and you can fetch response data as json by calling the
 	getJsonResponse method. View the documentation on the jsonwsp protocol
 	for more information on what data are sent and returned.
-	
+
 	For the serverpart, visit www.ladonize.org
-	
+
 	JSONWSP specification on wikipedia: http://en.wikipedia.org/wiki/JSON-WSP
-	
+
 	For more information, view the description for the classes and methods
 	in this file, for further usage examples view the examples in the example
 	folder.
@@ -43,11 +43,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
 
 /**
- * 
+ *
  * JsonWspClient
  * The primary class for the client, used to load a description from a url to a
  * jsonwsp service and then call the methods declared by the service.
- * 
+ *
  */
 class JsonWspClient
 {
@@ -69,16 +69,16 @@ class JsonWspClient
 	 */
 	public function __construct($description_url,$ignoreSSLWarnings=false,$cookies=null)
 	{
-	
+
 		if($cookies == null || !is_array($cookies))
 		{
 			$this->m_cookies = array();
 		}
-		else 
+		else
 		{
 			$this->m_cookies = $cookies;
 		}
-	
+
 		$this->m_ignoreSSLWarnings = $ignoreSSLWarnings;
 		$this->m_descriptionUrl = $description_url;
 		$response = $this->SendRequest($description_url);
@@ -92,7 +92,7 @@ class JsonWspClient
 	}
 
 	/**
-	 * 
+	 *
 	 * Used to tell the client if the service url from the server description should be used, or the url from the description url
 	 * should be used. This means that if setViaProxy is set to false, the description url will be used, if it is set to true
 	 * the client is forced to use the description url and not the native service url from the description..
@@ -111,9 +111,9 @@ class JsonWspClient
 			$this->m_serviceUrl = $this->m_serviceUrlFromDescription;
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * Adds a cookie to the server requests. Can be used if the server needs specific cookies set, to authenticate or dispatch
 	 * the request in a specific way. Multiple cookies can be added, but only one at a time.
 	 * @param $name The name of the cookie
@@ -125,7 +125,7 @@ class JsonWspClient
 	}
 
 	/**
-	 * 
+	 *
 	 * Removes a cookie by its name
 	 * @param $name The name of the cookie
 	 */
@@ -138,14 +138,14 @@ class JsonWspClient
 	}
 
 	/**
-	 * 
+	 *
 	 * Calls a service method on the service using a service name and optional arguments as an associative array
 	 * @param $methodname The name of the method to call on the service
 	 * @param $args The arguments to send with the service call as an associative array, using the keys as argument names.
 	 * @param $cookies List of cookies to use in the call, merges with the cookies already set on the client, but is not stored for future calls
 	 * @return JsonWspResponse object that contains the response information
 	 */
-	public function CallMethod($methodname,$args=null,$cookies=null)
+	public function CallMethod($methodname,$args=null,$cookies=[])
 	{
 		// No arguments given, use empty array
 		if($args == null) $args = array();
@@ -156,20 +156,20 @@ class JsonWspClient
 		// Send a request to the service url and return the jsonwsp response
 		return self::SendRequest($this->m_serviceUrl,json_encode($reqDict),"application/json",$this->m_ignoreSSLWarnings,array_merge($this->m_cookies,$cookies));
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * Sends a jsonwsp request to the server. Takes url, data to send and optional a content type and returns a jsonwsp response object.
 	 * @param $url Url to send request to
 	 * @param $data Data to send in the request, as a raw string value.
 	 * @param $content_type The contenttype to send in the request, defaults to application/json
 	 * @return JsonWspResponse object that contains the response information
 	 */
-	public static function SendRequest($url,$data="",$content_type="application/json",$ignoreSSLWarnings,$cookies)
+	public static function SendRequest($url,$data="",$content_type="application/json",$ignoreSSLWarnings=false,$cookies=[])
 	{
-	
+
 		$headers = array("Content-Type: ".$content_type, "Content-length: ".strlen($data));
-		
+
 		if(count($cookies) > 0)
 		{
 			$cookieString = "";
@@ -179,7 +179,7 @@ class JsonWspClient
 			}
 			$headers[] = "Cookie: ".$cookieString;
 		}
-		
+
 		// Init curl
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -190,7 +190,7 @@ class JsonWspClient
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);	// Ignore certificate inconsistencies
 			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);    	// Ignore certificate inconsistencies
 		}
-		
+
 		// Contains data, make POST request
 		if(strlen($data) > 0)
 		{
@@ -239,7 +239,7 @@ class JsonWspCallResult
 
 /**
  * JsonWspType
- * Used to describe the type of service response 
+ * Used to describe the type of service response
  */
 class JsonWspType
 {
@@ -247,11 +247,11 @@ class JsonWspType
 	const Description = 2;	// JSONWSP service description response
 	const Response = 3;		// JSONWSP method call response
 	const Fault = 4;		// JSONWSP fault returned in the response
-}	
+}
 
 
 /**
- * 
+ *
  * The JsonWspResponse is the object that parses and holds data that is returned when calling the service.
  * The class can be used to read the status (success or not), type of response and the data returned by the service.
  */
@@ -436,7 +436,7 @@ class JsonWspFault
 	{
 		return $this->m_details;
 	}
-	
+
 	/**
 	 * Returns the filename where the fault occured
 	 */
@@ -454,4 +454,3 @@ class JsonWspFault
 	}
 
 }
-

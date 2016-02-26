@@ -1,5 +1,5 @@
 <?php
-  
+
   global $mvid_config;
 
   $mvid_config = Array(
@@ -9,7 +9,7 @@
 
         /* Type in the shared key you recieved from MV-ID after you registered your application domain. If you havn't
            registered your application domain yet there is a form you can fill in at:
-             https://signon.mv-nordic.com/wiki/app-domain-reg */
+             https://signon.mv-nordic.com/wiki/SignUp */
         "shared_key" => "<shared-key>",
 
         /* The domain you wish to register the user sessions with. The base domain of this value must match the
@@ -18,21 +18,21 @@
 
         "redirect_on_success" => "start.php",
         "redirect_on_failure" => "error.php",),
-		
-	  "environment" => Array(
-	  
-		/* Determines what mv-id environment to use as default. Default is empty value which will use the production environment.
-		   Other values are dev and test, they will resolve to their designated development and test urls. 
-		   If this is set, context should also be used, or the application might not reach a valid mv-id instance
-		   This config value can be overridden by defining the variable $mvidEnv before the mvid-handler is included. */
-		"environment" => "",
-		
-		/* Sets the context to use on the dev or test environments. Each environment can have multiple named contexts running on them
-		   and to reach a specific one, this context is used.
-		   This config value can be overridden by defining the variable $mvidContext before the mvid-handler is included.*/
-		"context" => "",
-		
-	  ),
+
+      "environment" => Array(
+
+        /* Determines what mv-id environment to use as default. Default is empty value which will use the production environment.
+           Other values are dev and test, they will resolve to their designated development and test urls.
+           If this is set, context should also be used, or the application might not reach a valid mv-id instance
+           This config value can be overridden by defining the variable $mvidEnv before the mvid-handler is included. */
+        "environment" => "",
+
+        /* Sets the context to use on the dev or test environments. Each environment can have multiple named contexts running on them
+           and to reach a specific one, this context is used.
+           This config value can be overridden by defining the variable $mvidContext before the mvid-handler is included.*/
+        "context" => "",
+
+      ),
 
       "storage" => Array(
         /* The identifier name to store the mv_session_id with.
@@ -68,7 +68,7 @@
     )
   );
 
-  // This config tool expects the existance of a key-value array called $config. See the example config.php
+  // This config tool expects the existence of a key-value array called $mvid_config. See the example config.php
   // File in config/config.php
   function read_config($path,$default_val=NULL) {
     global $mvid_config;
@@ -86,5 +86,3 @@
     }
     return $current_crumb;
   }
-
-?>
